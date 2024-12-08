@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한식 페이지</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #444;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: #ff6f61;
+            color: #fff;
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        .left {
+            flex: 6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8f8f8;
+        }
+        .image-map-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .image-map-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .right {
+            flex: 4;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .right iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        footer {
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 15px 10px;
+            font-size: 14px;
+        }
+        footer a {
+            color: #ff6f61;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        양식
+    </header>
+    <div class="container">
+        <div class="left">
+            <div class="image-map-container">
+                <img src="eurmap.jpg".jpg" alt="양식 이미지맵" usemap="#food-map" id="responsive-image">
+                <map name="food-map" id="food-map">
+                    <area shape="rect" data-original-coords="270,840,302,886" href="./양식/PIZ.html" target="iframe" alt="피즈">
+                    <area shape="rect" data-original-coords="574,246,608,296" href="양식/더보일.html" target="iframe" alt="더보일">
+                    <area shape="rect" data-original-coords="780,278,818,336" href="양식/웜포레스트.html" target="iframe" alt="웜포레스트">
+                    <area shape="rect" data-original-coords="906,44,940,100" href="./양식/화목정.html" target="iframe" alt="PIZ">
+                    <area shape="rect" data-original-coords="966,86,1004,146" href="양식/컴포터블피자.html" target="iframe" alt="컴포터블피자">
+                    <area shape="rect" data-original-coords="930,126,966,176" href="양식/덕수파스타.html" target="iframe" alt="삼계탕">
+                    <area shape="rect" data-original-coords="1022,256,1066,312" href="양식/대잠맨션.html" target="iframe" alt="대잠맨션">
+                    <area shape="rect" data-original-coords="1174,372,1210,424" href="양식/쿠킹빌리지.html" target="iframe" alt="쿠킹빌리지">
+                    <area shape="rect" data-original-coords="1150,418,1182,464" href="양식/인브리즈.html" target="iframe" alt="인브리즈">
+                    <area shape="rect" data-original-coords="1192,426,1238,468" href="양식/논스탠다드.html" target="iframe" alt="논스탠다드">
+                    <area shape="rect" data-original-coords="1334,346,1372,408" href="양식/서가앤쿡.html" target="iframe" alt="서가앤쿡">
+                    <area shape="rect" data-original-coords="1404,480,1446,540" href="양식/믹스토랑.html" target="iframe" alt="믹스토랑">
+                    <area shape="rect" data-original-coords="1460,368,1514,424" href="양식/유난.html" target="iframe" alt="유난">
+                    <area shape="rect" data-original-coords="1624,264,1678,312" href="양식/델이든.html" target="iframe" alt="델이든">
+                </map>
+            </div>
+        </div>
+        <div class="right">
+            <iframe name="iframe" src="about:blank"></iframe>
+        </div>
+    </div>
+    <footer>
+        © 2024 양식 페이지 <a href="homepage2.html" target="_blank">홈으로 돌아가기</a>
+    </footer>
+
+    <script>
+        const originalImageWidth = 1920;
+        const originalImageHeight = 1080;
+
+        function resizeMap() {
+            const image = document.getElementById("responsive-image");
+            const map = document.getElementById("food-map");
+            const areas = map.getElementsByTagName("area");
+
+            const imageWidth = image.offsetWidth;
+            const imageHeight = image.offsetHeight;
+
+            for (let area of areas) {
+                const originalCoords = area.getAttribute("data-original-coords").split(",").map(Number);
+
+                const scaledCoords = originalCoords.map((coord, index) => {
+                    return index % 2 === 0
+                        ? Math.round(coord * (imageWidth / originalImageWidth)) // X좌표
+                        : Math.round(coord * (imageHeight / originalImageHeight)); // Y좌표
+                });
+
+                area.setAttribute("coords", scaledCoords.join(","));
+            }
+        }
+
+        window.addEventListener("resize", resizeMap);
+        window.addEventListener("load", resizeMap);
+    </script>
+</body>
+</html>

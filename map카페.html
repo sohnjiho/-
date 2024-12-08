@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카페 페이지</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #444;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: #ff6f61;
+            color: #fff;
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        .left {
+            flex: 6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8f8f8;
+        }
+        .image-map-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .image-map-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .right {
+            flex: 4;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .right iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        footer {
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 15px 10px;
+            font-size: 14px;
+        }
+        footer a {
+            color: #ff6f61;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        카페
+    </header>
+    <div class="container">
+        <div class="left">
+            <div class="image-map-container">
+                <img src="./양덕카페지도.png" alt="./양덕일식지도" usemap="#food-map" id="responsive-image">
+                <map name="food-map" id="food-map">
+                    <!-- 기존 좌표 수정 -->
+                    <area shape="rect" data-original-coords="384,108,418,149" href="카페/카페13/카페13.html" alt="밍기뉴" class="area-link">
+                    <area shape="rect" data-original-coords="419,146,448,184" href="카페/카페1/카페.html" alt="언브레이크" class="area-link">
+                    <area shape="rect" data-original-coords="670,373,701,422" href="카페/카페2/카페2.html" alt="그레그" class="area-link">
+                    <area shape="rect" data-original-coords="744,276,774,317" href="카페/카페3/카페3.html" alt="카피엔드" class="area-link">
+                    <area shape="rect" data-original-coords="782,518,814,561" href="카페/카페4/카페4.html" alt="디저트39" class="area-link">
+                    <area shape="rect" data-original-coords="974,513,1003,557" href="카페/카페5/카페5.html" alt="파란만잔" class="area-link">
+                    <area shape="rect" data-original-coords="878,604,915,644" href="카페/카페7/카페7.html" alt="로아카페" class="area-link">
+                    <area shape="rect" data-original-coords="812,663,843,705" href="카페/카페6/카페6.html" alt="플랜트" class="area-link">
+                    <area shape="rect" data-original-coords="1112,529,1144,569" href="카페/카페8/카페8.html" alt="로드샵" class="area-link">
+                    <area shape="rect" data-original-coords="1194,596,1229,638" href="카페/카페10/카페10.html" alt="어노이즈" class="area-link">
+                    <area shape="rect" data-original-coords="1199,644,1229,687" href="카페/카페9/카페9.html" alt="카페티타" class="area-link">
+                    <area shape="rect" data-original-coords="1235,667,1265,708" href="카페/카페11/카페11.html" alt="청솔" class="area-link">
+                </map>
+            </div>
+        </div>
+        <div class="right">
+            <iframe name="iframe" src="about:blank"></iframe>
+        </div>
+    </div>
+    <footer>
+        © 2024 카페 페이지 | <a href="homepage2.html" target="_blank">홈으로 돌아가기
+        </a>
+    </footer>
+
+    <script>
+        // 이미지 로딩 후 좌표 비율 계산
+        window.addEventListener('load', function() {
+            const image = document.getElementById('responsive-image');
+            const areas = document.querySelectorAll('.area-link');
+            const iframe = document.querySelector('iframe');
+
+            // 이미지의 실제 크기와 비율을 계산
+            const imageWidth = image.naturalWidth;
+            const imageHeight = image.naturalHeight;
+
+            // 이미지 크기가 조정될 때마다 좌표를 비례적으로 변환
+            window.addEventListener('resize', function() {
+                const containerWidth = image.clientWidth;
+                const containerHeight = image.clientHeight;
+
+                areas.forEach(area => {
+                    // 원래 좌표 값을 가져옴
+                    const [x1, y1, x2, y2] = area.getAttribute('data-original-coords').split(',').map(Number);
+
+                    // 비율에 맞게 좌표를 변환
+                    const scaleX = containerWidth / imageWidth;
+                    const scaleY = containerHeight / imageHeight;
+
+                    const newCoords = [
+                        Math.round(x1 * scaleX),
+                        Math.round(y1 * scaleY),
+                        Math.round(x2 * scaleX),
+                        Math.round(y2 * scaleY)
+                    ];
+
+                    // 변환된 좌표를 다시 설정
+                    area.coords = newCoords.join(',');
+                });
+            });
+
+            // 처음 로드 시에도 좌표를 맞춰준다.
+            window.dispatchEvent(new Event('resize'));
+
+            // 이미지 맵의 area 클릭 시 링크를 iframe에 표시
+            areas.forEach(area => {
+                area.addEventListener('click', function(event) {
+                    event.preventDefault(); // 기본 동작 막기
+                    iframe.src = area.href; // iframe에 링크 로드
+                });
+            });
+        });
+    </script>
+</body>
+</html>

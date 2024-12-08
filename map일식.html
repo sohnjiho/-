@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일식 페이지</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #444;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: #ff6f61;
+            color: #fff;
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        .left {
+            flex: 6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8f8f8;
+        }
+        .image-map-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .image-map-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .right {
+            flex: 4;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .right iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        footer {
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 15px 10px;
+            font-size: 14px;
+        }
+        footer a {
+            color: #ff6f61;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        일식
+    </header>
+    <div class="container">
+        <div class="left">
+            <div class="image-map-container">
+                <img src="양덕일식지도.png" alt="./양덕일식지도" usemap="#food-map" id="responsive-image">
+                <map name="food-map" id="food-map">
+                    <!-- 기존 좌표 수정 -->
+                    <area shape="rect" data-original-coords="1072,68,1216,124" href="일식/땡큐쏘마키 양덕점.html" alt="땡큐" class="area-link">
+                    <area shape="rect" data-original-coords="904,40,1020,84" href="일식/백소정.html" alt="비빔밥" class="area-link">
+                    <area shape="rect" data-original-coords="1240,28,1292,152" href="./일식/우공피쉬회초밥.html" alt="불고기" class="area-link">
+                    <area shape="rect" data-original-coords="1420,92,1540,140" href="./일식/야타이.html" alt="떡볶이" class="area-link">
+                    <area shape="rect" data-original-coords="1332,161,1377,287" href="일식/라멘구루마.html" alt="삼계탕" class="area-link">
+                    <area shape="rect" data-original-coords="768,1638,818,1770" href="일식/아비꼬.html" alt="삼계탕" class="area-link">
+                    <area shape="rect" data-original-coords="2149,905,2211,1032" href="일식/베라보 제면소.html" alt="삼계탕" class="area-link">
+                    <area shape="rect" data-original-coords="1800,868,1884,1003" href="일식/라멘 묘조.html" alt="삼계탕" class="area-link">
+                    <area shape="rect" data-original-coords="2509,724,2576,848" href="일식/숑숑돈까스 포항양덕점.html" alt="삼계탕" class="area-link">
+                    <area shape="rect" data-original-coords="2254,1209,2312,1339" href="일식/스고이 라멘.html" alt="삼계탕" class="area-link">
+                    <area shape="rect" data-original-coords="2452,871,2500,1003" href="일식/문어의 꿈.html" alt="삼계탕" class="area-link">
+                    <area shape="rect" data-original-coords="2097,1031,2160,1150" href="일식/스프커리 보울.html" alt="삼계탕" class="area-link">
+                    <area shape="rect" data-original-coords="1998,785,2046,909" href="일식/카츠류.html" alt="삼계탕" class="area-link">
+                    <area shape="rect" data-original-coords="2364,877,2424,1005" href="일식/타마시텐.html" alt="삼계탕" class="area-link">
+                </map>
+            </div>
+        </div>
+        <div class="right">
+            <iframe name="iframe" src="about:blank"></iframe>
+        </div>
+    </div>
+    <footer>
+        © 2024 일식 페이지 | <a href="homepage2.html" target="_blank">홈으로 돌아가기</a>
+    </footer>
+
+    <script>
+        // 이미지 로딩 후 좌표 비율 계산
+        window.addEventListener('load', function() {
+            const image = document.getElementById('responsive-image');
+            const areas = document.querySelectorAll('.area-link');
+            const iframe = document.querySelector('iframe');
+
+            // 이미지의 실제 크기와 비율을 계산
+            const imageWidth = image.naturalWidth;
+            const imageHeight = image.naturalHeight;
+
+            // 이미지 크기가 조정될 때마다 좌표를 비례적으로 변환
+            window.addEventListener('resize', function() {
+                const containerWidth = image.clientWidth;
+                const containerHeight = image.clientHeight;
+
+                areas.forEach(area => {
+                    // 원래 좌표 값을 가져옴
+                    const [x1, y1, x2, y2] = area.getAttribute('data-original-coords').split(',').map(Number);
+
+                    // 비율에 맞게 좌표를 변환
+                    const scaleX = containerWidth / imageWidth;
+                    const scaleY = containerHeight / imageHeight;
+
+                    const newCoords = [
+                        Math.round(x1 * scaleX),
+                        Math.round(y1 * scaleY),
+                        Math.round(x2 * scaleX),
+                        Math.round(y2 * scaleY)
+                    ];
+
+                    // 변환된 좌표를 다시 설정
+                    area.coords = newCoords.join(',');
+                });
+            });
+
+            // 처음 로드 시에도 좌표를 맞춰준다.
+            window.dispatchEvent(new Event('resize'));
+
+            // 이미지 맵의 area 클릭 시 링크를 iframe에 표시
+            areas.forEach(area => {
+                area.addEventListener('click', function(event) {
+                    event.preventDefault(); // 기본 동작 막기
+                    iframe.src = area.href; // iframe에 링크 로드
+                });
+            });
+        });
+    </script>
+</body>
+</html>

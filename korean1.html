@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한식 페이지</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #444;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: #ff6f61;
+            color: #fff;
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        .left {
+            flex: 6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8f8f8;
+        }
+        .image-map-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .image-map-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .right {
+            flex: 4;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .right iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        footer {
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 15px 10px;
+            font-size: 14px;
+        }
+        footer a {
+            color: #ff6f61;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        area:hover {
+         outline: 2px solid #ff6f61; /* 영역 강조 */
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        한식
+    </header>
+    <div class="container">
+        <div class="left">
+            <div class="image-map-container">
+                <img src="korean1map.jpg" alt="한식 이미지맵" usemap="#food-map" id="responsive-image">
+                <map name="food-map" id="food-map">
+                    <area shape="rect" data-original-coords="742,24,794,62" href="./한식/청년식당 파일/청년식당.html" target="iframe" alt="청년식당" data-tooltip="청년식당">
+                    <area shape="rect" data-original-coords="790,104,830,154" href="./한식/온정가 파일/온정가.html" target="iframe" alt="온정가" data-tooltip="온정가">
+                    <area shape="rect" data-original-coords="704,190,754,234" href="./한식/압구정화로구이 파일/압구정화로구이.html" target="iframe" alt="압구정화로구이" data-tooltip="압구정화로구이">
+                    <area shape="rect" data-original-coords="916,442,958,496" href="./한식/금수저삼겹/금수저.html" target="iframe" alt="금수저삼겹" data-tooltip="금수저삼겹">
+                    <area shape="rect" data-original-coords="1256,616,1294,670" href="한식/바벤 파일/바벤.html" target="iframe" alt="바벤" data-tooltip="바벤">
+                    <area shape="rect" data-original-coords="1380,644,1432,688" href="한식/오늘은 김치찌개 파일/오늘은 김치찌개.html" target="iframe" alt="오늘은 김치찌개" data-tooltip="오늘은 김치찌개">
+                    <area shape="rect" data-original-coords="1246,704,1280,750" href="한식/맛있는 고기에 솜씨를 더하다 파일/맛있는 고기에 솜씨를 더하다.html" target="iframe" alt="맛있는고기에솜씨를더하다" data-tooltip="맛있는고기에솜씨를더하다">
+                    <area shape="rect" data-original-coords="1274,674,1322,710" href="한식/이유있는 갈비찜 파일/이유있는 갈비찜.html" target="iframe" alt="이유있는갈비찜" data-tooltip="이유있는갈비찜">
+                    <area shape="rect" data-original-coords="1238,804,1280,846" href="한식/마장동 뒷고기 파일/마장동 뒷고기.html" target="iframe" alt="마장동뒷고기"data-tooltip="마장동뒷고기">
+                    <area shape="rect" data-original-coords="1216,856,1266,912" href="한식/청진동해장국 파일/청진동해장국.html" target="iframe" alt="청진동해장국" data-tooltip="청진동해장국">
+                    <area shape="rect" data-original-coords="1326,812,1372,854" href="한식/원칼국수 파일/원칼국수.html" target="iframe" alt="원칼국수"data-tooltip="원칼국수">
+                    <area shape="rect" data-original-coords="1398,808,1422,858" href="한식/최가네꽁보리밥 파일/최가체꽁보리밥.html" target="iframe" alt="최가네꽁보리밥" data-tooltip="최가네꽁보리밥">
+                    <area shape="rect" data-original-coords="1566,618,1610,656" href="한식/오또상스테키 파일/오또상스테키.html" target="iframe" alt="오또상"data-tooltip="오또상스테키">
+                    <area shape="rect" data-original-coords="1614,560,1644,616" href="한식/밥한민국 파일/밥한민국.html" target="iframe" alt="밥한민국" data-tooltip="밥한민국">
+                </map>
+            </div>
+        </div>
+        <div class="right">
+            <iframe name="iframe" src="about:blank"></iframe>
+        </div>
+    </div>
+    <footer>
+        © 2024 양식 <a href="homepage2.html" target="_blank">홈으로 돌아가기</a>
+    </footer>
+
+    <script>
+        const originalImageWidth = 1920;
+        const originalImageHeight = 1080;
+
+        function resizeMap() {
+            const image = document.getElementById("responsive-image");
+            const map = document.getElementById("food-map");
+            const areas = map.getElementsByTagName("area");
+
+            const imageWidth = image.offsetWidth;
+            const imageHeight = image.offsetHeight;
+
+            for (let area of areas) {
+                const originalCoords = area.getAttribute("data-original-coords").split(",").map(Number);
+
+                const scaledCoords = originalCoords.map((coord, index) => {
+                    return index % 2 === 0
+                        ? Math.round(coord * (imageWidth / originalImageWidth)) // X좌표
+                        : Math.round(coord * (imageHeight / originalImageHeight)); // Y좌표
+                });
+
+                area.setAttribute("coords", scaledCoords.join(","));
+            }
+        }
+
+        window.addEventListener("resize", resizeMap);
+        window.addEventListener("load", resizeMap);
+        
+
+        
+        document.querySelectorAll("area").forEach(area => {
+        area.addEventListener("mouseover", function(event) {
+        const tooltip = document.createElement("div");
+        tooltip.className = "tooltip";
+        tooltip.innerText = area.getAttribute("data-tooltip");
+
+        // 툴팁 스타일 설정
+        tooltip.style.position = "absolute";
+        tooltip.style.background = "#ff6f61";
+        tooltip.style.color = "#fff";
+        tooltip.style.padding = "5px 10px";
+        tooltip.style.borderRadius = "5px";
+        tooltip.style.boxShadow = "0 2px 5px rgba(0,0,0,0.3)";
+        tooltip.style.fontSize = "14px";
+        tooltip.style.pointerEvents = "none"; // 마우스 이벤트 차단
+
+        // 툴팁 위치 설정
+        tooltip.style.left = `${event.pageX + 10}px`;
+        tooltip.style.top = `${event.pageY + 10}px`;
+
+        document.body.appendChild(tooltip);
+    });
+
+    area.addEventListener("mousemove", function(event) {
+        const tooltip = document.querySelector(".tooltip");
+        if (tooltip) {
+            // 마우스 이동에 따라 툴팁 위치 업데이트
+            tooltip.style.left = `${event.pageX + 10}px`;
+            tooltip.style.top = `${event.pageY + 10}px`;
+        }
+    });
+
+    area.addEventListener("mouseout", function() {
+        const tooltip = document.querySelector(".tooltip");
+        if (tooltip) {
+            tooltip.remove();
+        }
+    });
+});
+
+
+    </script>
+</body>
+</html>
